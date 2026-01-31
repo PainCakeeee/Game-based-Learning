@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBL: The Learning Odyssey</title>
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --accent-color: #38bdf8;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .start-btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .start-btn:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .level-section {
+            margin-bottom: 150px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s;
+        }
+
+        .level-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .level-tag {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .description {
+            margin-top: 25px;
+            line-height: 1.6;
+            background: var(--card-bg);
+            padding: 20px;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .side-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    </head>
+<body>
+    <div id="scroll-progress"></div>
+
+    <div class="side-nav">
+        <div class="nav-dot" onclick="window.scrollTo(0,0)"></div>
+        <div class="nav-dot" data-level="1"></div>
+        <div class="nav-dot" data-level="2"></div>
+        <div class="nav-dot" data-level="3"></div>
+        <div class="nav-dot" data-level="4"></div>
+    </div>
+
+    <header>
+        <h1>Game-Based Learning</h1>
+        <p class="subtitle">Exploring the intersection of play, technology, and the future of education.</p>
+        <a href="#level1" class="start-btn">PRESS START</a>
+    </header>
+
+    <div class="container">
+        <section id="level1" class="level-section" data-index="1">
+            <span class="level-tag">LEVEL 01: THE NEW FRONTIER</span>
+            <h2>Beyond the Screen</h2>
+            <div class="video-wrapper">
+                <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="description">
+                How can we solve the "boredom crisis" in traditional education? In this introductory episode, we explore the rise of GBL and its transformative impact on learner engagement.
+            </div>
+        </section>
+
+        <section id="level2" class="level-section" data-index="2">
+            <span class="level-tag">LEVEL 02: THE CORE DESIGN</span>
+            <h2>The "Chocolate-Covered Broccoli" Trap</h2>
+            <div class="video-wrapper">
+                <iframe id="player2" src="https://www.youtube.com/embed/lb0NCmWVEPc?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="description">
+                Not all educational games are created equal. We dive into the design principles that separate a truly immersive experience from a "boring quiz in disguise."
+            </div>
+        </section>
+
+        <section id="level3" class="level-section" data-index="3">
+            <span class="level-tag">LEVEL 03: THE REALITY REVOLUTION</span>
+            <h2>Stepping into XR (VR/AR/MR)</h2>
+            <div class="video-wrapper">
+                <iframe id="player3" src="https://www.youtube.com/embed/XrwAQ88q_y8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="description">
+                From virtual labs to holographic anatomy, explore how Extended Reality (XR) technology allows students to "live" within the knowledge itself.
+            </div>
+        </section>
+
+        <section id="level4" class="level-section" data-index="4">
+            <span class="level-tag">LEVEL 04: THE INTELLIGENT PLAYGROUND</span>
+            <h2>The Soul of the Game: AI</h2>
+            <div class="video-wrapper">
+                <iframe id="player4" src="https://www.youtube.com/embed/XUp0IYzKqlY?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="description">
+                The series finale. Discover how Generative AI breathes life into GBL, creating personalized, adaptive journeys that cater to every unique learner.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Created for Learning, Education and Technology (LET) Master's Program | University of Oulu</p>
+        <p>&copy; 2026 Mia (Mingmin Chen)</p>
+    </footer>
+
+    <script>
+        function updateNavDots() {
+            const dots = document.querySelectorAll('.nav-dot');
+            const sections = document.querySelectorAll('.level-section');
+            let activeIdx = 0;
+            const mid = window.innerHeight * 0.5;
+            sections.forEach((sec, i) => {
+                const r = sec.getBoundingClientRect();
+                if (r.top <= mid && r.bottom >= mid) {
+                    activeIdx = i + 1;
+                }
+                if (window.scrollY >= sec.offsetTop - 400) {
+                    sec.classList.add('active');
+                }
+            });
+            dots.forEach(d => d.classList.remove('active'));
+            if (dots[activeIdx]) dots[activeIdx].classList.add('active');
+        }
+
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+            updateNavDots();
+        });
+
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                const level = this.getAttribute('data-level');
+                if(level) {
+                    document.getElementById('level' + level).scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                setTimeout(updateNavDots, 200);
+            });
+        });
+        window.addEventListener('load', updateNavDots);
+        
+        const players = {};
+        function onYouTubeIframeAPIReady() {
+            document.querySelectorAll('.video-wrapper iframe').forEach((iframe, idx) => {
+                if (!iframe.id) iframe.id = 'player_' + (idx + 1);
+                players[iframe.id] = new YT.Player(iframe.id);
+            });
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        const iframe = entry.target.querySelector('iframe');
+                        if (!iframe) return;
+                        const p = players[iframe.id];
+                        if (p && typeof p.pauseVideo === 'function') {
+                            p.pauseVideo();
+                        } else {
+                            iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
+                        }
+                    }
+                });
+            }, { threshold: 0.25 });
+            document.querySelectorAll('.video-wrapper').forEach(el => observer.observe(el));
+        }
+    </script>
+</body>
+</html>
