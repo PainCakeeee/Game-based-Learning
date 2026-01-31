@@ -112,6 +112,21 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
+        .media-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .media-row .video-wrapper {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .next-level {
+            flex: 0 0 auto;
+        }
+
         .video-wrapper iframe {
             position: absolute;
             top: 0;
@@ -120,6 +135,36 @@
             height: 100%;
         }
 
+        .next-level {
+            padding: 10px 14px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            background: transparent;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .next-level:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .media-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .next-level {
+                align-self: flex-end;
+            }
+            .media-row .video-wrapper {
+                width: 100%;
+            }
+        }
         .description {
             margin-top: 25px;
             line-height: 1.6;
@@ -183,47 +228,55 @@
         <section id="level1" class="level-section" data-index="1">
             <span class="level-tag">LEVEL 01: THE NEW FRONTIER</span>
             <h2>Beyond the Screen</h2>
-            <div class="video-wrapper">
-                <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-            </div>
             <div class="description">
                 How can we solve the "boredom crisis" in traditional education? In this introductory episode, we explore the rise of GBL and its transformative impact on learner engagement.
+            </div>
+            <div class="media-row">
+                <div class="video-wrapper">
+                    <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <button class="next-level" data-target="#level2">NEXT LEVEL 👇</button>
             </div>
         </section>
 
         <section id="level2" class="level-section" data-index="2">
             <span class="level-tag">LEVEL 02: THE CORE DESIGN</span>
             <h2>The "Chocolate-Covered Broccoli" Trap</h2>
-            <div class="video-wrapper">
-                <iframe id="player2" src="https://www.youtube.com/embed/lb0NCmWVEPc?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-            </div>
             <div class="description">
                 Not all educational games are created equal. We dive into the design principles that separate a truly immersive experience from a "boring quiz in disguise."
+            </div>
+            <div class="media-row">
+                <div class="video-wrapper">
+                    <iframe id="player2" src="https://www.youtube.com/embed/lb0NCmWVEPc?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <button class="next-level" data-target="#level3">NEXT LEVEL 👇</button>
             </div>
         </section>
 
         <section id="level3" class="level-section" data-index="3">
             <span class="level-tag">LEVEL 03: THE REALITY REVOLUTION</span>
             <h2>Stepping into XR (VR/AR/MR)</h2>
-            <div class="video-wrapper">
-                <iframe id="player3" src="https://www.youtube.com/embed/XrwAQ88q_y8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-            </div>
             <div class="description">
                 From virtual labs to holographic anatomy, explore how Extended Reality (XR) technology allows students to "live" within the knowledge itself.
+            </div>
+            <div class="media-row">
+                <div class="video-wrapper">
+                    <iframe id="player3" src="https://www.youtube.com/embed/XrwAQ88q_y8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <button class="next-level" data-target="#level4">NEXT LEVEL 👇</button>
             </div>
         </section>
 
         <section id="level4" class="level-section" data-index="4">
             <span class="level-tag">LEVEL 04: THE INTELLIGENT PLAYGROUND</span>
             <h2>The Soul of the Game: AI</h2>
-            <div class="video-wrapper">
-                <iframe id="player4" src="https://www.youtube.com/embed/XUp0IYzKqlY?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-            </div>
             <div class="description">
                 The series finale. Discover how Generative AI breathes life into GBL, creating personalized, adaptive journeys that cater to every unique learner.
             </div>
+            <div class="video-wrapper">
+                <iframe id="player4" src="https://www.youtube.com/embed/XUp0IYzKqlY?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            </div>
         </section>
-    </div>
 
     <footer>
         <p>Created for Learning, Education and Technology (LET) Master's Program | University of Oulu</p>
@@ -261,7 +314,7 @@
             dot.addEventListener('click', function() {
                 const level = this.getAttribute('data-level');
                 if(level) {
-                    document.getElementById('level' + level).scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('level' + level).scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
@@ -292,6 +345,21 @@
             }, { threshold: 0.25 });
             document.querySelectorAll('.video-wrapper').forEach(el => observer.observe(el));
         }
+        document.querySelectorAll('.next-level').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                const el = document.querySelector(target);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+        document.querySelectorAll('a.start-btn').forEach(a => {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const el = document.querySelector(href);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
     </script>
 </body>
 </html>
