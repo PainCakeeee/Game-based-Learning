@@ -198,6 +198,57 @@
             transform: scale(1.5);
         }
 
+        .references-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .ref-column h3 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ref-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ref-column li {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .scrollable-list {
+            height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            opacity: 0.7;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .scrollable-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollable-list::-webkit-scrollbar-thumb {
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .references-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
         footer {
             text-align: center;
             padding: 50px;
@@ -216,6 +267,7 @@
         <div class="nav-dot" data-level="2"></div>
         <div class="nav-dot" data-level="3"></div>
         <div class="nav-dot" data-level="4"></div>
+        <div class="nav-dot" data-level="5"></div>
     </div>
 
     <header>
@@ -233,7 +285,7 @@
             </div>
             <div class="media-row">
                 <div class="video-wrapper">
-                    <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <button class="next-level" data-target="#level2">NEXT LEVEL 👇</button>
             </div>
@@ -273,8 +325,49 @@
             <div class="description">
                 The series finale. Discover how Generative AI breathes life into GBL, creating personalized, adaptive journeys that cater to every unique learner.
             </div>
-            <div class="video-wrapper">
-                <iframe id="player4" src="https://www.youtube.com/embed/XUp0IYzKqlY?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+            <div class="media-row">
+                <div class="video-wrapper">
+                    <iframe id="player4" src="https://www.youtube.com/embed/XUp0IYzKqlY?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <button class="next-level" data-target="#level5">NEXT LEVEL 👇</button>
+            </div>
+        </section>
+
+        <section id="level5" class="level-section" data-index="5">
+            <span class="level-tag">REFERENCES</span>
+            <h2>References & Credits</h2>
+            <div class="references-grid">
+                <div class="ref-column">
+                    <h3>Academic Research</h3>
+                    <ul>
+                        <li><strong>GBL Meta-Analysis:</strong> Karakoç, B., Eryılmaz, K., Turan Özpolat, E., & Yıldırım, İ. (2022). The Effect of Game-Based Learning on Student Achievement: A Meta-Analysis Study. <em>Technology, Knowledge and Learning</em>. <a href="https://doi.org/10.1007/s10758-020-09471-5" target="_blank" style="color: var(--accent-color);">DOI Link</a></li>
+                        <li><strong>Mixed Reality Anatomy:</strong> Michalski, C., Cowan, M., Bohinsky, J., Dickerson, R., & Plochocki, J. H. (2023). Evaluation of cognitive load for a mixed reality anatomy application. <em>Translational Research in Anatomy</em>. <a href="https://doi.org/10.1016/j.tria.2023.100247" target="_blank" style="color: var(--accent-color);">DOI Link</a></li>
+                        <li><strong>Generative NPCs:</strong> Park, J. S., O’Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). Generative Agents: Interactive Simulacra of Human Behavior. <em>arXiv</em>. <a href="https://doi.org/10.48550/arXiv.2304.03442" target="_blank" style="color: var(--accent-color);">DOI Link</a></li>
+                    </ul>
+                </div>
+                <div class="ref-column">
+                    <h3>Media Attributions</h3>
+                    <div class="scrollable-list">
+                        <p><strong>Educational & Tech Showcases:</strong></p>
+                        <ul style="padding-left: 20px;">
+                            <li>"The AI Behind Duolingo" & "Personalized learning with AI" by <em>Duolingo</em></li>
+                            <li>"NVIDIA ACE x Inworld AI" & "How To Put Inworld AI Into Your Game" by <em>NVIDIA/Inworld AI</em></li>
+                            <li>"HoloAnatomy app" & "University Overview" by <em>Case Western Reserve University</em></li>
+                            <li>"Labster Physiology Simulations" by <em>Labster</em></li>
+                            <li>"Welcome to Minecraft Education" by <em>Microsoft</em></li>
+                            <li>"Discover Pokémon in the Real World" by <em>Niantic/Pokémon GO</em></li>
+                        </ul>
+                        <p><strong>Game Mechanics & Gameplay:</strong></p>
+                        <ul style="padding-left: 20px;">
+                            <li>"Oblivion NPCs are great" by <em>GameSprout</em></li>
+                            <li>"Every Blooket Game Mode" & "Gold Quest Mode" by <em>Blooket Tutorials</em></li>
+                            <li>"Prehistoric Adventure at Bandung Geological Museum" by <em>Museum Geologi</em></li>
+                            <li>"Kahoot Intro" by <em>Kahoot!</em></li>
+                            <li>"Introducing Duolingo Adventures" by <em>Duolingo</em></li>
+                        </ul>
+                        <p><em>*Visual assets for AI demonstrations generated using Flow AI and Midjourney.</em></p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -284,6 +377,18 @@
     </footer>
 
     <script>
+        // Fix YouTube Origin Issue for local file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.warn("Running from file:// protocol. Disabling YouTube API features to prevent Error 153.");
+            document.querySelectorAll('iframe').forEach(iframe => {
+                let src = iframe.getAttribute('src');
+                if (src && src.includes('enablejsapi=1')) {
+                    // Remove enablejsapi=1 if running locally without a server
+                    iframe.src = src.replace('enablejsapi=1', 'enablejsapi=0');
+                }
+            });
+        }
+
         function updateNavDots() {
             const dots = document.querySelectorAll('.nav-dot');
             const sections = document.querySelectorAll('.level-section');
