@@ -242,45 +242,6 @@
             border-radius: 3px;
         }
 
-        /* Video Cover for Click-to-Play to prevent layout shift */
-        .video-cover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #000;
-            transition: opacity 0.3s;
-        }
-        .play-icon {
-            width: 68px;
-            height: 48px;
-            background-color: rgba(33, 33, 33, 0.8);
-            border-radius: 12px;
-            position: relative;
-            transition: all 0.2s;
-        }
-        .video-cover:hover .play-icon {
-            background-color: #f00;
-        }
-        .play-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #fff;
-        }
-
         @media (max-width: 768px) {
             .references-grid {
                 grid-template-columns: 1fr;
@@ -324,7 +285,7 @@
             </div>
             <div class="media-row">
                 <div class="video-wrapper">
-                    <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="player1" src="https://www.youtube.com/embed/WAg8Jj49-q8?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <button class="next-level" data-target="#level2">NEXT LEVEL 👇</button>
             </div>
@@ -450,74 +411,16 @@
             });
         }
 
-        function initVideoCovers() {
-            document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-                if (wrapper.querySelector('.video-cover')) return;
-
-                const iframe = wrapper.querySelector('iframe');
-                if (!iframe) return;
-                
-                const match = iframe.src.match(/embed\/([^\?]+)/);
-                if (!match) return;
-                const videoId = match[1];
-                
-                const cover = document.createElement('div');
-                 cover.className = 'video-cover';
-                 
-                 // Check if maxresdefault exists (YouTube returns 120px wide placeholder if not)
-                 const img = new Image();
-                 img.src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-                 img.onload = function() {
-                    if (this.width === 120) {
-                        cover.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
-                    } else {
-                        cover.style.backgroundImage = `url(${this.src})`;
-                    }
-                 };
-                 img.onerror = function() {
-                    cover.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
-                 };
-                 
-                 const icon = document.createElement('div');
-                icon.className = 'play-icon';
-                cover.appendChild(icon);
-                
-                wrapper.appendChild(cover);
-                
-                cover.addEventListener('click', function() {
-                    cover.style.opacity = '0';
-                    setTimeout(() => {
-                        cover.style.display = 'none';
-                    }, 300);
-
-                    if (window.location.protocol === 'file:') {
-                         const src = iframe.src;
-                         if (!src.includes('autoplay=1')) {
-                            iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
-                         }
-                    } else {
-                        const player = players[iframe.id];
-                        if (player && typeof player.playVideo === 'function') {
-                            player.playVideo();
-                        } else {
-                             iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-                        }
-                    }
-                });
-            });
-        }
-        window.addEventListener('DOMContentLoaded', initVideoCovers);
-
         function updateNavDots() {
             const dots = document.querySelectorAll('.nav-dot');
             const sections = document.querySelectorAll('.level-section');
             let activeIdx = 0;
-            // Use 60% of viewport height as trigger line for better stability
-            const triggerPoint = window.innerHeight * 0.6;
-            
+            const mid = window.innerHeight * 0.5;
             sections.forEach((sec, i) => {
                 const r = sec.getBoundingClientRect();
-                if (r.top <= triggerPoint) {
+                // Check if the section top has passed the middle of the screen
+                // Use a larger threshold to avoid flickering between sections
+                if (r.top <= mid + 100) {
                     activeIdx = i + 1;
                 }
                 if (window.scrollY >= sec.offsetTop - 400) {
